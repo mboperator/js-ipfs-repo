@@ -85,9 +85,11 @@ module.exports = (repo) => {
               close () {
 
               }
+
               has () {
                 return true
               }
+
               batch () {
                 return {
                   put () {
@@ -217,6 +219,7 @@ module.exports = (repo) => {
               close () {
 
               }
+
               get (c) {
                 if (c.toString() === key.toString()) {
                   throw err
@@ -278,7 +281,7 @@ module.exports = (repo) => {
           await repo.blocks.has('foo')
           throw new Error('Should have thrown')
         } catch (err) {
-          expect(err.code).to.equal('ERR_INVALID_CID')
+          expect(err.code).to.equal('ERR_INVALID_KEY')
         }
       })
 
@@ -304,7 +307,7 @@ module.exports = (repo) => {
           await repo.blocks.delete('foo')
           throw new Error('Should have thrown')
         } catch (err) {
-          expect(err.code).to.equal('ERR_INVALID_CID')
+          expect(err.code).to.equal('ERR_INVALID_KEY')
         }
       })
     })

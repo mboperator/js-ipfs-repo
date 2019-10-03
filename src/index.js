@@ -277,11 +277,11 @@ class IpfsRepo {
     let count = new Big(0)
     let size = new Big(0)
 
-    for await (const block of this.blocks.query({})) {
+    for await (const block of this.blocks.query({}, false)) {
       count = count.plus(1)
       size = size
         .plus(block.value.byteLength)
-        .plus(block.key._buf.byteLength)
+        .plus(block.key.toBuffer().byteLength)
     }
 
     return { count, size }
@@ -292,7 +292,7 @@ async function getSize (queryFn) {
   let sum = new Big(0)
   for await (const block of queryFn.query({})) {
     sum.plus(block.value.byteLength)
-      .plus(block.key._buf.byteLength)
+      .plus(block.key.toBuffer().byteLength)
   }
   return sum
 }
